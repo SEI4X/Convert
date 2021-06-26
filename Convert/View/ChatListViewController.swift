@@ -28,6 +28,7 @@ class ChatListViewController: UITableViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .white
         tableView.tableFooterView = UIView()
+        tableView.separatorColor = UIColor.clear
         tableView.rowHeight = 81
     }
     

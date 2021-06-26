@@ -67,6 +67,7 @@ class ChatListViewCell: UITableViewCell {
         dateTimeLbl.numberOfLines = 1
         dateTimeLbl.text = "18:31"
         dateTimeLbl.font = UIFont.systemFont(ofSize: 15)
+        dateTimeLbl.textColor = .gray
     }
     
     private func configureChatName() {
@@ -80,7 +81,8 @@ class ChatListViewCell: UITableViewCell {
         
         nameLbl.numberOfLines = 1
         nameLbl.text = "Mashkov Alexei"
-        nameLbl.font = UIFont.boldSystemFont(ofSize: 16)
+        nameLbl.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        nameLbl.textColor = .darkGray
     }
     
     private func configureMessage() {
@@ -96,8 +98,8 @@ class ChatListViewCell: UITableViewCell {
         
         messageLbl.numberOfLines = 1
         messageLbl.text = "Hello, my friend! dgn gkjbjngkbjkn jbnrjkn rgbn"
-        messageLbl.font = UIFont.systemFont(ofSize: 16)
-        messageLbl.textColor = .darkGray
+        messageLbl.font = UIFont.systemFont(ofSize: 15)
+        messageLbl.textColor = .gray
     }
     
     private func configureUnreadMessageCount() {}
@@ -131,8 +133,8 @@ class ChatListViewCell: UITableViewCell {
         
         statusCircle.layer.cornerRadius = 34.5
         statusCircle.backgroundColor = .white
-        statusCircle.layer.borderColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00).cgColor
-        statusCircle.layer.borderWidth = 2.5
+        //statusCircle.layer.borderColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00).cgColor
+        //statusCircle.layer.borderWidth = 2.5
         statusCircle.clipsToBounds = true
     }
     

@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 class TabBarController: UITabBarController {
     private let imageConfig = UIImage.SymbolConfiguration(weight: .medium)
