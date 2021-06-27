@@ -10,7 +10,11 @@
 		25092C9E2681DC420016CA54 /* ChatListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25092C9D2681DC420016CA54 /* ChatListViewCell.swift */; };
 		25092CA22681E65A0016CA54 /* ChatListViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25092CA12681E65A0016CA54 /* ChatListViewExtensions.swift */; };
 		25092CA4268260280016CA54 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25092CA3268260280016CA54 /* ImageExtensions.swift */; };
+		25204CD92687961A007583AD /* SearchCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25204CD82687961A007583AD /* SearchCellProtocol.swift */; };
 		25896F682683C0DD005C790E /* SearchViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25896F672683C0DD005C790E /* SearchViewExtensions.swift */; };
+		2599AFD626872E300015F0D9 /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AFD526872E300015F0D9 /* GroupCollectionViewCell.swift */; };
+		2599AFD826872E400015F0D9 /* PeopleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AFD726872E400015F0D9 /* PeopleCollectionViewCell.swift */; };
+		2599AFDA26872E640015F0D9 /* SearchTitlesCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AFD926872E640015F0D9 /* SearchTitlesCollectionViewCells.swift */; };
 		25B85DC02680BAA000FF946B /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B85DBF2680BAA000FF946B /* ChatListViewController.swift */; };
 		25B85DC22680BAAF00FF946B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B85DC12680BAAF00FF946B /* ProfileViewController.swift */; };
 		25D635CA2670F8C700AAD3D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D635C92670F8C700AAD3D0 /* AppDelegate.swift */; };
@@ -49,7 +53,11 @@
 		25092C9D2681DC420016CA54 /* ChatListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewCell.swift; sourceTree = "<group>"; };
 		25092CA12681E65A0016CA54 /* ChatListViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewExtensions.swift; sourceTree = "<group>"; };
 		25092CA3268260280016CA54 /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		25204CD82687961A007583AD /* SearchCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellProtocol.swift; sourceTree = "<group>"; };
 		25896F672683C0DD005C790E /* SearchViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewExtensions.swift; sourceTree = "<group>"; };
+		2599AFD526872E300015F0D9 /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		2599AFD726872E400015F0D9 /* PeopleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCollectionViewCell.swift; sourceTree = "<group>"; };
+		2599AFD926872E640015F0D9 /* SearchTitlesCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTitlesCollectionViewCells.swift; sourceTree = "<group>"; };
 		25B85DBF2680BAA000FF946B /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		25B85DC12680BAAF00FF946B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		25D635C62670F8C700AAD3D0 /* Convert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Convert.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,11 +133,10 @@
 		25896F692683C0FE005C790E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2599AFDD26872E940015F0D9 /* Profile */,
+				2599AFDC26872E800015F0D9 /* Chat */,
+				2599AFDB26872E6A0015F0D9 /* Search */,
 				25D635CD2670F8C700AAD3D0 /* TabBarController.swift */,
-				25D635FC2671190300AAD3D0 /* SearchViewController.swift */,
-				25B85DBF2680BAA000FF946B /* ChatListViewController.swift */,
-				25092C9D2681DC420016CA54 /* ChatListViewCell.swift */,
-				25B85DC12680BAAF00FF946B /* ProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,8 +144,37 @@
 		25896F6A2683C11E005C790E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				25204CD82687961A007583AD /* SearchCellProtocol.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2599AFDB26872E6A0015F0D9 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				25D635FC2671190300AAD3D0 /* SearchViewController.swift */,
+				2599AFD926872E640015F0D9 /* SearchTitlesCollectionViewCells.swift */,
+				2599AFD726872E400015F0D9 /* PeopleCollectionViewCell.swift */,
+				2599AFD526872E300015F0D9 /* GroupCollectionViewCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		2599AFDC26872E800015F0D9 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				25B85DBF2680BAA000FF946B /* ChatListViewController.swift */,
+				25092C9D2681DC420016CA54 /* ChatListViewCell.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		2599AFDD26872E940015F0D9 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				25B85DC12680BAAF00FF946B /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		25D635BD2670F8C700AAD3D0 = {
@@ -458,14 +494,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2599AFD626872E300015F0D9 /* GroupCollectionViewCell.swift in Sources */,
 				25092C9E2681DC420016CA54 /* ChatListViewCell.swift in Sources */,
 				25B85DC02680BAA000FF946B /* ChatListViewController.swift in Sources */,
 				25D635CE2670F8C700AAD3D0 /* TabBarController.swift in Sources */,
+				2599AFD826872E400015F0D9 /* PeopleCollectionViewCell.swift in Sources */,
 				25D635D42670F8C700AAD3D0 /* Convert.xcdatamodeld in Sources */,
 				25D635CA2670F8C700AAD3D0 /* AppDelegate.swift in Sources */,
 				25092CA4268260280016CA54 /* ImageExtensions.swift in Sources */,
 				25B85DC22680BAAF00FF946B /* ProfileViewController.swift in Sources */,
+				2599AFDA26872E640015F0D9 /* SearchTitlesCollectionViewCells.swift in Sources */,
 				25D635CC2670F8C700AAD3D0 /* SceneDelegate.swift in Sources */,
+				25204CD92687961A007583AD /* SearchCellProtocol.swift in Sources */,
 				25092CA22681E65A0016CA54 /* ChatListViewExtensions.swift in Sources */,
 				25D635FD2671190300AAD3D0 /* SearchViewController.swift in Sources */,
 				25896F682683C0DD005C790E /* SearchViewExtensions.swift in Sources */,
