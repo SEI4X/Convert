@@ -8,31 +8,17 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    
-    enum SectionType: Int, CaseIterable {
-        case grops, people
-        var columnCount: Int {
-            switch self {
-            case .grops:
-                return 1
-            case .people:
-                return 2
-            }
-        }
-    }
+    static let headerElementKind = "header-element-kind"
     
     var dataSource: UICollectionViewDiffableDataSource<SectionType, Int>!
     var collectionView: UICollectionView!
-    
+    enum SectionType: Int, CaseIterable { case grops, people }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        configurateView()
-        configureCollectionView()
-    }
-    
-    private func configurateView() {
         title = "Search"
         view.backgroundColor = .white
+        configureCollectionView()
     }
     
     private func configureCollectionView() {
@@ -50,15 +36,21 @@ class SearchViewController: UIViewController {
         cellType: T.Type, with intValue: Int, for indexPath: IndexPath) -> T {
         guard let cell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: cellType.reusedId, for: indexPath) as? T
-        else { fatalError("\(cellType)") }
+        else { fatalError("\(cellType)")}
+        
+        self.view.layer.shadowColor = UIColor.black.cgColor
+        self.view.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        self.view.layer.shadowRadius = 2.0
+        self.view.layer.shadowOpacity = 0.5
+        self.view.layer.masksToBounds = false
+        self.view.layer.shadowPath = UIBezierPath(roundedRect: self.view.bounds, cornerRadius: 8).cgPath
         return cell
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<SectionType, Int>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, intValue) in
+        dataSource = UICollectionViewDiffableDataSource<SectionType, Int>(collectionView: collectionView, cellProvider: { [self] (collectionView, indexPath, intValue) in
             let section = SectionType(rawValue: indexPath.section)!
             switch section {
-            
             case .grops:
                 return self.configureCell(cellType: GroupCollectionViewCell.self, with: intValue, for: indexPath)
             case .people:
@@ -71,59 +63,84 @@ class SearchViewController: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<SectionType, Int>()
         let itemPerSection = 10
         SectionType.allCases.forEach { sectionType in
-            let itemOffSet = sectionType.columnCount * itemPerSection
-            let itemUpperbound = itemOffSet + itemPerSection
             snapshot.appendSections([sectionType])
+            let itemOffSet = sectionType.rawValue * itemPerSection
+            let itemUpperbound = itemOffSet + itemPerSection
             snapshot.appendItems(Array(itemOffSet..<itemUpperbound))
         }
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                             heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(44))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        let spacing = CGFloat(10)
-        group.interItemSpacing = .fixed(spacing)
-        let section = NSCollectionLayoutSection(group: group)
-
-        let layout = UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvirnment) -> NSCollectionLayoutSection? in
+            let section = SectionType(rawValue: sectionIndex)!
+            switch section {
+            case .grops:
+                return self.configureGroupsSection()
+            case .people:
+                return self.configurePeopleSection()
+            }
+        }
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 40
+        layout.configuration = config
+        
         return layout
     }
     
     private func configureGroupsSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                             heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(44))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        let spacing = CGFloat(10)
-        group.interItemSpacing = .fixed(spacing)
+        item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0,
+                                                          bottom: 0, trailing: 10)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(290),
+                                               heightDimension: .estimated(127))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        let groupSpacing = CGFloat(10)
+        group.interItemSpacing = .fixed(groupSpacing)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: groupSpacing,
+                                                             bottom: 0, trailing: groupSpacing)
+        
         return section
     }
     
     private func configurePeopleSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                             heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(44))
+                                               heightDimension: .absolute(180))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        let spacing = CGFloat(10)
-        group.interItemSpacing = .fixed(spacing)
+        let groupSpacing = CGFloat(10)
+        group.interItemSpacing = .fixed(groupSpacing)
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = groupSpacing
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: groupSpacing,
+                                                        bottom: 0, trailing: groupSpacing)
         return section
+    }
+}
+
+import SwiftUI
+
+struct AdvancedProvider: PreviewProvider {
+    static var previews: some View {
+        ContainterView().edgesIgnoringSafeArea(.all)
+    }
+    
+    struct ContainterView: UIViewControllerRepresentable {
+        
+        let tabBar = SearchViewController()
+        func makeUIViewController(context: UIViewControllerRepresentableContext<AdvancedProvider.ContainterView>) -> SearchViewController {
+            return tabBar
+        }
+        
+        func updateUIViewController(_ uiViewController: AdvancedProvider.ContainterView.UIViewControllerType, context: UIViewControllerRepresentableContext<AdvancedProvider.ContainterView>) {
+            
+        }
     }
 }
