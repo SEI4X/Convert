@@ -7,32 +7,48 @@
 
 import UIKit
 
-class TitleSupplementaryView: UICollectionReusableView {
+// MARK: - Group header view
+class GroupsHeader: UICollectionReusableView {
     let label = UILabel()
-    static let reuseIdentifier = "title-supplementary-reuse-identifier"
+    static let reuseIdentifier = "group-header"
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        label.text = "Recommended groups"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.textColor = .lightGray
+        
     }
     required init?(coder: NSCoder) {
         fatalError()
     }
 }
 
-extension TitleSupplementaryView {
-    func configure() {
+// MARK: - People header view
+class PeopleHeader: UICollectionReusableView {
+    let label = UILabel()
+    static let reuseIdentifier = "people-header"
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-        let inset = CGFloat(10)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset)
-        ])
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        label.text = "Recommended people"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.textColor = .lightGray
+    }
+    required init?(coder: NSCoder) {
+        fatalError()
     }
 }
 

@@ -14,7 +14,7 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
     private var groupImg = UIImageView()
     private var name = UILabel()
     private var subscribeButton = UIButton()
-    private var description = UILabel()
+    private var groupDescription = UILabel()
     private var peopleCount = UILabel()
     private let peopleIcon: UIImageView = {
         let img = UIImageView(image: UIImage(systemName: "person.2.fill"))
@@ -28,12 +28,12 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
         configureLayer()
         
         addSubview(groupImg)
-        addSubview(nameLbl)
+        addSubview(name)
         addSubview(subscribeButton)
         addSubview(devider)
         addSubview(peopleIcon)
         addSubview(peopleCount)
-        addSubview(descriptionLbl)
+        addSubview(groupDescription)
         
         configureImg()
         configureName()
@@ -65,17 +65,17 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
     }
     
     private func configureName() {
-        nameLbl.numberOfLines = 1
-        nameLbl.text = "Architectors club"
-        nameLbl.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        nameLbl.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)
+        name.numberOfLines = 1
+        name.text = "Architectors club"
+        name.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        name.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)
         
-        nameLbl.translatesAutoresizingMaskIntoConstraints = false
-        nameLbl.topAnchor
+        name.translatesAutoresizingMaskIntoConstraints = false
+        name.topAnchor
             .constraint(equalTo: topAnchor, constant: 12).isActive = true
-        nameLbl.leadingAnchor
+        name.leadingAnchor
             .constraint(equalTo: groupImg.trailingAnchor, constant: 10).isActive = true
-        nameLbl.heightAnchor
+        name.heightAnchor
             .constraint(equalToConstant: 18).isActive = true
     }
     
@@ -90,7 +90,7 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
         
         subscribeButton.translatesAutoresizingMaskIntoConstraints = false
         subscribeButton.topAnchor
-            .constraint(equalTo: nameLbl.bottomAnchor, constant: 7).isActive = true
+            .constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
         subscribeButton.leadingAnchor
             .constraint(equalTo: groupImg.trailingAnchor, constant: 10).isActive = true
         subscribeButton.heightAnchor
@@ -104,7 +104,7 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
         
         devider.translatesAutoresizingMaskIntoConstraints = false
         devider.topAnchor
-            .constraint(equalTo: nameLbl.bottomAnchor, constant: 6).isActive = true
+            .constraint(equalTo: name.bottomAnchor, constant: 6).isActive = true
         devider.leadingAnchor
             .constraint(equalTo: subscribeButton.trailingAnchor, constant: 12).isActive = true
         devider.heightAnchor
@@ -140,19 +140,19 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
     }
     
     private func configureDescription() {
-        descriptionLbl.numberOfLines = 2
-        descriptionLbl.text = "Channel for architecture lovers and enginering masters!"
-        descriptionLbl.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        descriptionLbl.textColor = .darkGray
+        groupDescription.numberOfLines = 2
+        groupDescription.text = "Channel for architecture lovers and enginering masters!"
+        groupDescription.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        groupDescription.textColor = .darkGray
         
-        descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLbl.topAnchor
+        groupDescription.translatesAutoresizingMaskIntoConstraints = false
+        groupDescription.topAnchor
             .constraint(equalTo: groupImg.bottomAnchor, constant: 5).isActive = true
-        descriptionLbl.leadingAnchor
+        groupDescription.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        descriptionLbl.trailingAnchor
+        groupDescription.trailingAnchor
             .constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        descriptionLbl.bottomAnchor
+        groupDescription.bottomAnchor
             .constraint(equalTo: bottomAnchor, constant: -10).isActive = true
     }
     

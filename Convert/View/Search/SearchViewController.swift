@@ -8,11 +8,12 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    static let headerElementKind = "header-element-kind"
+
     
-    var dataSource: UICollectionViewDiffableDataSource<SectionType, Int>!
-    var collectionView: UICollectionView!
-    enum SectionType: Int, CaseIterable { case grops, people }
+    private var dataSource: UICollectionViewDiffableDataSource<SectionType, Int>!
+    private var collectionView: UICollectionView!
+    private enum SectionType: Int, CaseIterable { case grops, people }
+    private var snapshot = NSDiffableDataSourceSnapshot<SectionType, Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +24,17 @@ class SearchViewController: UIViewController {
     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        collectionView.backgroundColor = .white
+        view.addSubview(collectionView)
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         collectionView.register(GroupCollectionViewCell.self, forCellWithReuseIdentifier: GroupCollectionViewCell.reusedId)
         collectionView.register(PeopleCollectionViewCell.self, forCellWithReuseIdentifier: PeopleCollectionViewCell.reusedId)
-        collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
+        collectionView.register(GroupsHeader.self, forSupplementaryViewOfKind: "group-header", withReuseIdentifier: GroupsHeader.reuseIdentifier)
+        collectionView.register(PeopleHeader.self, forSupplementaryViewOfKind: "people-header", withReuseIdentifier: PeopleHeader.reuseIdentifier)
+        
         configureDataSource()
         updateData()
+        configureHeaders()
     }
     
     private func configureCell<T: SearchConfiguredCell>(
@@ -60,7 +65,6 @@ class SearchViewController: UIViewController {
     }
     
     private func updateData() {
-        var snapshot = NSDiffableDataSourceSnapshot<SectionType, Int>()
         let itemPerSection = 10
         SectionType.allCases.forEach { sectionType in
             snapshot.appendSections([sectionType])
@@ -82,10 +86,26 @@ class SearchViewController: UIViewController {
             }
         }
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 40
+        config.interSectionSpacing = 10
         layout.configuration = config
         
         return layout
+    }
+    
+    private func configureHeaders() {
+        dataSource?.supplementaryViewProvider = { (
+            collectionView: UICollectionView,
+            kind: String,
+            indexPath: IndexPath) -> UICollectionReusableView? in
+            
+            let section = SectionType(rawValue: indexPath.section)!
+            switch section {
+            case .grops:
+                return collectionView.dequeueReusableSupplementaryView(ofKind: "group-header", withReuseIdentifier: GroupsHeader.reuseIdentifier, for: indexPath) as! GroupsHeader
+            case .people:
+                return collectionView.dequeueReusableSupplementaryView(ofKind: "people-header", withReuseIdentifier: PeopleHeader.reuseIdentifier, for: indexPath) as! PeopleHeader
+            }
+        }
     }
     
     private func configureGroupsSection() -> NSCollectionLayoutSection {
@@ -101,10 +121,15 @@ class SearchViewController: UIViewController {
         let groupSpacing = CGFloat(10)
         group.interItemSpacing = .fixed(groupSpacing)
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: groupSpacing,
                                                              bottom: 0, trailing: groupSpacing)
-        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(40))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: "group-header",
+                                                                 alignment: .top)
+        section.boundarySupplementaryItems = [header]
         return section
     }
     
@@ -114,13 +139,22 @@ class SearchViewController: UIViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .absolute(180))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitem: item, count: 1)
         let groupSpacing = CGFloat(10)
         group.interItemSpacing = .fixed(groupSpacing)
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = groupSpacing
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: groupSpacing,
-                                                        bottom: 0, trailing: groupSpacing)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: groupSpacing,
+                                                        bottom: 0,
+                                                        trailing: groupSpacing)
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(40))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: "people-header",
+                                                                 alignment: .top)
+        section.boundarySupplementaryItems = [header]
         return section
     }
 }
