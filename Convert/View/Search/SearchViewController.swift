@@ -17,9 +17,9 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search"
         view.backgroundColor = .white
         configureCollectionView()
+        configNavigationBar()
     }
     
     private func configureCollectionView() {

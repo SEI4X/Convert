@@ -15,9 +15,13 @@ extension ChatListViewController: UISearchResultsUpdating {
     
     func configNavigationBar() {
         let newMessageButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"),
-                                               style: .plain, target: self,action: #selector(addTapped))
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(addTapped))
         let boxButton = UIBarButtonItem(image: UIImage(systemName: "tray.full"),
-                                        style: .plain, target: self,action: #selector(addTapped))
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(addTapped))
         
         title = "Chats"
         searchController.searchResultsUpdater = self

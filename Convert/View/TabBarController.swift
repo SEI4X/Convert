@@ -15,7 +15,6 @@ class TabBarController: UITabBarController {
     private var searchViewController = UINavigationController()
     private var chatListViewController = UINavigationController()
     private var profileViewController = UINavigationController()
-    private let blurEffect = UIBlurEffect(style: .light)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +59,10 @@ class TabBarController: UITabBarController {
         navCont.navigationBar.shadowImage = UIImage()
         navCont.navigationBar.backgroundColor = .clear
         navCont.view.backgroundColor = .clear
-        navCont.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navCont.navigationBar.isTranslucent = true
+        navCont.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
+        let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.translatesAutoresizingMaskIntoConstraints = false
         navCont.view.insertSubview(blurView, at: 1)
@@ -83,6 +83,7 @@ class TabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = UIColor(red: 0.16, green: 0.30, blue: 0.37, alpha: 1.00)
         tabBar.tintColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
         
+        let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.translatesAutoresizingMaskIntoConstraints = false
         tabBar.insertSubview(blurView, at: 0)
