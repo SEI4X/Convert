@@ -113,7 +113,7 @@ class SearchViewController: UIViewController {
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0,
-                                                          bottom: 0, trailing: 10)
+                                                          bottom: 0, trailing: 12)
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(290),
                                                heightDimension: .estimated(127))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
