@@ -141,14 +141,14 @@ class SearchViewController: UIViewController {
                                                heightDimension: .absolute(180))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitem: item, count: 1)
-        let groupSpacing = CGFloat(10)
+        let groupSpacing = CGFloat(12)
         group.interItemSpacing = .fixed(groupSpacing)
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = groupSpacing
         section.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                        leading: groupSpacing,
+                                                        leading: 10,
                                                         bottom: 0,
-                                                        trailing: groupSpacing)
+                                                        trailing: 10)
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                 heightDimension: .absolute(40))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,

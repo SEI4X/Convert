@@ -67,7 +67,7 @@ class GroupCollectionViewCell: UICollectionViewCell, SearchConfiguredCell {
     private func configureName() {
         name.numberOfLines = 1
         name.text = "Architectors club"
-        name.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        name.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         name.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)
         
         name.translatesAutoresizingMaskIntoConstraints = false
