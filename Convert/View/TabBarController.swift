@@ -57,9 +57,20 @@ class TabBarController: UITabBarController {
         let navCont = UINavigationController(rootViewController: rootVC)
         navCont.tabBarItem = barItem
         navCont.navigationBar.shadowImage = UIImage()
-        navCont.navigationBar.backgroundColor = .white
-        navCont.navigationBar.isTranslucent = false
-        navCont.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navCont.navigationBar.backgroundColor = .clear
+        navCont.view.backgroundColor = .clear
+        navCont.navigationBar.isTranslucent = true
+        navCont.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        navCont.view.insertSubview(blurView, at: 1)
+        blurView.topAnchor.constraint(equalTo: navCont.view.topAnchor).isActive = true
+        blurView.leadingAnchor.constraint(equalTo: navCont.navigationBar.leadingAnchor).isActive = true
+        blurView.bottomAnchor.constraint(equalTo: navCont.navigationBar.bottomAnchor).isActive = true
+        blurView.widthAnchor.constraint(equalTo: navCont.navigationBar.widthAnchor).isActive = true
+        
         return navCont
     }
     
@@ -67,9 +78,19 @@ class TabBarController: UITabBarController {
     private func configureTabBar() {
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
-        tabBar.backgroundColor = .white
+        tabBar.isTranslucent = true
+        tabBar.backgroundColor = .clear
         tabBar.unselectedItemTintColor = UIColor(red: 0.16, green: 0.30, blue: 0.37, alpha: 1.00)
         tabBar.tintColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
+        
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.insertSubview(blurView, at: 0)
+        blurView.topAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
+        blurView.leadingAnchor.constraint(equalTo: tabBar.leadingAnchor).isActive = true
+        blurView.heightAnchor.constraint(equalTo: tabBar.heightAnchor).isActive = true
+        blurView.widthAnchor.constraint(equalTo: tabBar.widthAnchor).isActive = true
     }
 }
 
