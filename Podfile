@@ -8,6 +8,7 @@ target 'Convert' do
   # Pods for Convert
   pod 'RxSwift', '6.2.0'
   pod 'RxCocoa', '6.2.0'
+  pod 'LXPageControl'
 
   target 'ConvertTests' do
     inherit! :search_paths
