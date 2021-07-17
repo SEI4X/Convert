@@ -10,7 +10,7 @@ import UIKit
 extension ProfileViewController {
     
     func configNavigationBar() {
-        title = "Profile"
+        title = .none
         edgesForExtendedLayout = UIRectEdge.all
         extendedLayoutIncludesOpaqueBars = true
         navigationController?.setNavigationBarHidden(true, animated: false)

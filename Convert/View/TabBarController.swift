@@ -20,12 +20,12 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         //  Bar items config
-        chatTabBarItem = configBarItem(title: "Chats", imageName: "paperplane",
-                                       selectedImageName: "paperplane.fill")
-        searchTabBarItem = configBarItem(title: "Search", imageName: "house",
-                                         selectedImageName: "house.fill")
-        profileTabBarItem = configBarItem(title: "Profile", imageName: "person",
-                                          selectedImageName: "person.fill")
+        chatTabBarItem = configBarItem(imageName: "chat-icon",
+                                       selectedImageName: "chat-icon.fill")
+        searchTabBarItem = configBarItem(imageName: "home-icon",
+                                         selectedImageName: "home-icon.fill")
+        profileTabBarItem = configBarItem(imageName: "user-icon",
+                                          selectedImageName: "user-icon.fill")
         
         //  Controllers
         searchViewController = configureController(rootVC: SearchViewController(),
@@ -42,12 +42,12 @@ class TabBarController: UITabBarController {
     }
     
     // MARK: - Configurating functions
-    private func configBarItem(title ttl: String, imageName img: String,
+    private func configBarItem(imageName img: String,
                                selectedImageName sImg: String) ->UITabBarItem {
         
-        UITabBarItem(title: ttl, image: UIImage(systemName: img,withConfiguration: imageConfig)?
+        UITabBarItem(title: "", image: UIImage(named: img, in: .main, with: imageConfig)?
                         .withRenderingMode(UIImage.RenderingMode.alwaysTemplate),
-                     selectedImage: UIImage(systemName: sImg, withConfiguration: imageConfig))
+                     selectedImage: UIImage(named: sImg, in: .main, with: imageConfig))
     }
     
     // Confugurating navigation controllers

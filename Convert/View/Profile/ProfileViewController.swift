@@ -12,6 +12,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
                              UICollectionViewDelegateFlowLayout {
 
     private var scrollView = UIScrollView()
+    private let secondColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
+    //UIColor(red: 0.23, green: 0.79, blue: 0.95, alpha: 1.00)
     private let photoLayout = UICollectionViewFlowLayout()
     private var photoCollectionView: UICollectionView?
     private var nameAndAge = UILabel()
@@ -22,6 +24,19 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
     private var mediaBtn = UIButton()
     private var groupsBtn = UIButton()
     private var likesBtn = UIButton()
+    private lazy var city = UILabel()
+    private lazy var job = UILabel()
+    private lazy var userDescription = UILabel()
+    private lazy var education = UILabel()
+    private lazy var maritalStatus = UILabel()
+    private lazy var gender = UILabel()
+    private lazy var height = UILabel()
+    private lazy var sexualOrientation = UILabel()
+    private lazy var alcohol = UILabel()
+    private lazy var smoking = UILabel()
+    private lazy var userChildren = UILabel()
+    private lazy var interests = UILabel()
+    private lazy var tags = UILabel()
     private let aboutlbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "About"
@@ -33,7 +48,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         let pc = LXPageControl()
         pc.currentPage = 0
         pc.pages = 4
-        pc.activeColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
+        pc.activeColor = secondColor
         pc.inactiveColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.9)
         pc.elementHeight = 3
         pc.elementWidth = view.frame.width / 4 - 4 * 5
@@ -43,6 +58,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
         view.backgroundColor = .white
         configNavigationBar()
         configureScrollView()
@@ -95,20 +111,24 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         centerButton.layer.cornerRadius = 35
         centerButton.clipsToBounds = true
         centerButton.layer.borderWidth = 2.5
-        centerButton.layer.borderColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00).cgColor
+        centerButton.layer.borderColor = secondColor.cgColor
         
         centerButton.translatesAutoresizingMaskIntoConstraints = false
-        centerButton.centerXAnchor.constraint(equalTo: topMenuView.centerXAnchor).isActive = true
-        centerButton.centerYAnchor.constraint(equalTo: topMenuView.topAnchor).isActive = true
-        centerButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        centerButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        centerButton.centerXAnchor
+            .constraint(equalTo: topMenuView.centerXAnchor).isActive = true
+        centerButton.centerYAnchor
+            .constraint(equalTo: topMenuView.topAnchor).isActive = true
+        centerButton.widthAnchor
+            .constraint(equalToConstant: 70).isActive = true
+        centerButton.heightAnchor
+            .constraint(equalToConstant: 70).isActive = true
         centerButton.backgroundColor = .white
         
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-        centerButton.setImage(UIImage(systemName: "gearshape",
-                                      withConfiguration: imageConfig),
-                              for: .normal)
-        centerButton.tintColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 45, weight: .light)
+        let img = UIImage(named: "settings-icon", in: .main, with: imageConfig)
+        img?.withTintColor(secondColor, renderingMode: .alwaysTemplate)
+        centerButton.setImage(img, for: .normal)
+        centerButton.tintColor = secondColor
     }
     
     private func configureTopButtonsStackView() {
@@ -130,29 +150,41 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         topButtonsStack.spacing = 1
         
         topButtonsStack.translatesAutoresizingMaskIntoConstraints = false
-        topButtonsStack.leadingAnchor.constraint(equalTo: topMenuView.leadingAnchor, constant: 15).isActive = true
-        topButtonsStack.trailingAnchor.constraint(equalTo: topMenuView.trailingAnchor, constant: -15).isActive = true
-        topButtonsStack.bottomAnchor.constraint(equalTo: topMenuView.bottomAnchor, constant: -10).isActive = true
-        topButtonsStack.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        topButtonsStack.leadingAnchor
+            .constraint(equalTo: topMenuView.leadingAnchor, constant: 15).isActive = true
+        topButtonsStack.trailingAnchor
+            .constraint(equalTo: topMenuView.trailingAnchor, constant: -15).isActive = true
+        topButtonsStack.bottomAnchor
+            .constraint(equalTo: topMenuView.bottomAnchor, constant: -10).isActive = true
+        topButtonsStack.heightAnchor
+            .constraint(equalToConstant: 50).isActive = true
         topButtonsStack.backgroundColor = .clear
     }
     
     private func configureAboutLable() {
         scrollView.addSubview(aboutlbl)
         aboutlbl.translatesAutoresizingMaskIntoConstraints = false
-        aboutlbl.topAnchor.constraint(equalTo: topMenuView.bottomAnchor, constant: 5).isActive = true
-        aboutlbl.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 27).isActive = true
-        aboutlbl.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10).isActive = true
-        aboutlbl.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        aboutlbl.topAnchor
+            .constraint(equalTo: topMenuView.bottomAnchor, constant: 5).isActive = true
+        aboutlbl.leadingAnchor
+            .constraint(equalTo: scrollView.leadingAnchor, constant: 27).isActive = true
+        aboutlbl.trailingAnchor
+            .constraint(equalTo: scrollView.trailingAnchor, constant: -10).isActive = true
+        aboutlbl.heightAnchor
+            .constraint(equalToConstant: 25).isActive = true
     }
     
     private func configureCityLbl() {
         scrollView.addSubview(aboutlbl)
         aboutlbl.translatesAutoresizingMaskIntoConstraints = false
-        aboutlbl.topAnchor.constraint(equalTo: topMenuView.bottomAnchor, constant: 5).isActive = true
-        aboutlbl.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 27).isActive = true
-        aboutlbl.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10).isActive = true
-        aboutlbl.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        aboutlbl.topAnchor
+            .constraint(equalTo: topMenuView.bottomAnchor, constant: 5).isActive = true
+        aboutlbl.leadingAnchor
+            .constraint(equalTo: scrollView.leadingAnchor, constant: 27).isActive = true
+        aboutlbl.trailingAnchor
+            .constraint(equalTo: scrollView.trailingAnchor, constant: -10).isActive = true
+        aboutlbl.heightAnchor
+            .constraint(equalToConstant: 25).isActive = true
     }
     
     private func createButton(firstText: NSString, secondText: NSString) -> UIButton {
@@ -175,11 +207,13 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
             //assigning diffrent fonts to both substrings
         let font1: UIFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         let attributes1 = [NSMutableAttributedString.Key.font: font1]
-        let attrString1 = NSMutableAttributedString(string: substring1, attributes: attributes1)
+        let attrString1 = NSMutableAttributedString(string: substring1,
+                                                    attributes: attributes1)
 
         let font2: UIFont = UIFont.systemFont(ofSize: 16, weight: .regular)
         let attributes2 = [NSMutableAttributedString.Key.font: font2]
-        let attrString2 = NSMutableAttributedString(string: substring2, attributes: attributes2)
+        let attrString2 = NSMutableAttributedString(string: substring2,
+                                                    attributes: attributes2)
 
             //appending both attributed strings
         attrString1.append(attrString2)
@@ -197,13 +231,15 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         photoLayout.sectionInset = .zero
         photoLayout.scrollDirection = .horizontal
         
-//        let window = UIApplication.shared.windows[0]
-//        let topPadding = window.safeAreaInsets.top
-        pageControl.frame = CGRect(x: 0, y: 35 /*topPadding*/, width: view.frame.width, height: 5)
-        photoCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0,
-                                                             width: view.frame.width,
-                                                             height: view.frame.height / 2 + 80),
-                                               collectionViewLayout: photoLayout)
+        let window = UIApplication.shared.windows[0]
+        let topPadding = window.safeAreaInsets.top
+        pageControl.frame = CGRect(x: 0, y: topPadding /*topPadding*/,
+                                   width: view.frame.width, height: 5)
+        photoCollectionView = UICollectionView(
+            frame: CGRect(x: 0, y: 0,
+                          width: view.frame.width,
+                          height: view.frame.height / 2 + 80),
+            collectionViewLayout: photoLayout)
         photoCollectionView!.backgroundColor = .white
         photoCollectionView!.register(UICollectionViewCell.self,
                                       forCellWithReuseIdentifier: "cell")
@@ -229,7 +265,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         let img = UIImageView(frame: CGRect(x: 0, y: 0,
                                             width: cell.frame.width,
                                             height: cell.frame.height))
-        img.image = UIImage(named: "man")
+        img.image = UIImage(named: "test")
         img.contentMode = .scaleAspectFill
         cell.backgroundView = img
         return cell
