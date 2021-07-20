@@ -10,7 +10,7 @@ import UIKit
 extension UICollectionViewCell {
     
     func configureLayer() {
-        backgroundColor = UIColor(red: 0.96, green: 0.97, blue: 0.98, alpha: 1.00)
+        backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.00)//UIColor(red: 0.96, green: 0.97, blue: 0.98, alpha: 1.00)
         layer.cornerRadius = 12.0
         layer.borderWidth = 0.0
         layer.shadowColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.00).cgColor

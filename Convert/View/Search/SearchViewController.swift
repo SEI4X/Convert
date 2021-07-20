@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
         configureDataSource()
         updateData()
         configureHeaders()
+        collectionView.showsVerticalScrollIndicator = false
     }
     
     private func configureCell<T: SearchConfiguredCell>(
@@ -147,7 +148,7 @@ class SearchViewController: UIViewController {
         section.interGroupSpacing = groupSpacing
         section.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                         leading: 10,
-                                                        bottom: 0,
+                                                        bottom: 10,
                                                         trailing: 10)
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                 heightDimension: .absolute(40))

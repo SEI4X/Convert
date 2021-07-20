@@ -36,9 +36,11 @@ class TabBarController: UITabBarController {
                                                     barItem: profileTabBarItem)
         
         //  Tab bar config
+        delegate = self
         configureTabBar()
         viewControllers = [searchViewController, chatListViewController, profileViewController]
         selectedIndex = 1
+        view.backgroundColor = .white
     }
     
     // MARK: - Configurating functions
@@ -57,9 +59,9 @@ class TabBarController: UITabBarController {
         let navCont = UINavigationController(rootViewController: rootVC)
         navCont.tabBarItem = barItem
         navCont.navigationBar.shadowImage = UIImage()
-        navCont.navigationBar.backgroundColor = .clear
-        navCont.view.backgroundColor = .clear
-        navCont.navigationBar.isTranslucent = true
+        navCont.navigationBar.backgroundColor = .white
+        navCont.view.backgroundColor = .white
+        navCont.navigationBar.isTranslucent = false
         navCont.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
         let blurEffect = UIBlurEffect(style: .light)
@@ -79,7 +81,7 @@ class TabBarController: UITabBarController {
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
         tabBar.isTranslucent = true
-        tabBar.backgroundColor = .clear
+        tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = UIColor(red: 0.16, green: 0.30, blue: 0.37, alpha: 1.00)
         tabBar.tintColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
         
@@ -93,4 +95,3 @@ class TabBarController: UITabBarController {
         blurView.widthAnchor.constraint(equalTo: tabBar.widthAnchor).isActive = true
     }
 }
-
