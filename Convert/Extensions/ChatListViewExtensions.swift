@@ -22,8 +22,8 @@ extension ChatListViewController: UISearchResultsUpdating {
                                         style: .plain,
                                         target: self,
                                         action: #selector(addTapped))
-        
-        title = "Chats"
+        title = .none
+        navigationItem.title = "Chats"
         searchController.searchResultsUpdater = self
         boxButton.tintColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
         newMessageButton.tintColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)

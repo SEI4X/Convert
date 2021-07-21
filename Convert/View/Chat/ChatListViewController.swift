@@ -30,6 +30,7 @@ class ChatListViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor.clear
         tableView.rowHeight = 81
+        tableView.showsVerticalScrollIndicator = false
     }
     
     private func setTableViewDelegates() {

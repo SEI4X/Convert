@@ -1,4 +1,5 @@
 PODS:
+  - LXPageControl (1.0.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
@@ -7,20 +8,23 @@ PODS:
   - RxSwift (6.2.0)
 
 DEPENDENCIES:
+  - LXPageControl
   - RxCocoa (= 6.2.0)
   - RxSwift (= 6.2.0)
 
 SPEC REPOS:
   trunk:
+    - LXPageControl
     - RxCocoa
     - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
+  LXPageControl: 9da4a6318158faf7c472fb7bb80113d9ce8707ca
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
 
-PODFILE CHECKSUM: cf9b3040ea657b270e819ea715fadf13d29ba640
+PODFILE CHECKSUM: 2b1c043a5c895439da3079f4080d18ff590287f4
 
 COCOAPODS: 1.10.1
