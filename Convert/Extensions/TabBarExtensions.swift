@@ -14,7 +14,7 @@ extension TabBarController: UITabBarControllerDelegate {
         let fromIndex = viewControllers?.firstIndex(of: fromVC) ?? 0
         let toIndex = viewControllers?.firstIndex(of: toVC) ?? 0
         let multiplicationFactor = Int(fromIndex - toIndex) > 0 ? 1 : -1
-        return AnimatedTransition(animationDuration: 1.05,
+        return AnimatedTransition(animationDuration: 0.07,
                                   multiplicationFactor: multiplicationFactor)
     }
 }
