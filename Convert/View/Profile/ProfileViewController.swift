@@ -10,7 +10,6 @@ import LXPageControl
 
 class ProfileViewController: UIViewController, UICollectionViewDataSource,
                              UICollectionViewDelegateFlowLayout {
-
     var scrollView = UIScrollView()
     private let secondColor = UIColor(red: 0.00, green: 0.68, blue: 1.00, alpha: 1.00)
     //UIColor(red: 0.23, green: 0.79, blue: 0.95, alpha: 1.00)
@@ -20,36 +19,36 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
     private var centerButton = UIButton()
     private var topMenuView = UIView()
     private var topButtonsStack = UIStackView()
-    private var contactsBtn = UIButton()
+    private var contactsBtn: UIButton!
     private var mediaBtn = UIButton()
     private var groupsBtn = UIButton()
     private var likesBtn = UIButton()
-    private lazy var city = UILabel()
-    private lazy var cityIcon = UIImageView()
-    private lazy var job = UILabel()
-    private lazy var jobIcon = UIImageView()
-    private lazy var userDescription = UILabel()
-    private lazy var userDescriptionIcon = UIImageView()
-    private lazy var education = UILabel()
-    private lazy var educationIcon = UIImageView()
-    private lazy var maritalStatus = UILabel()
-    private lazy var maritalStatusIcon = UIImageView()
-    private lazy var gender = UILabel()
-    private lazy var genderIcon = UIImageView()
-    private lazy var height = UILabel()
-    private lazy var heightIcon = UIImageView()
-    private lazy var sexualOrientation = UILabel()
-    private lazy var sexualOrientationIcon = UIImageView()
-    private lazy var alcohol = UILabel()
-    private lazy var alcoholIcon = UIImageView()
-    private lazy var smoking = UILabel()
-    private lazy var smokingIcon = UIImageView()
-    private lazy var userChildren = UILabel()
-    private lazy var userChildrenIcon = UIImageView()
-    private lazy var interests = UILabel()
-    private lazy var interestsIcon = UIImageView()
-    private lazy var tags = UILabel()
-    private lazy var tagsIcon = UIImageView()
+    private var city = UILabel()
+    private var cityIcon: UIImageView?
+    private var job = UILabel()
+    private var jobIcon: UIImageView?
+    private var userDescription = UILabel()
+    private var userDescriptionIcon: UIImageView?
+    private var education = UILabel()
+    private var educationIcon: UIImageView?
+    private var maritalStatus = UILabel()
+    private var maritalStatusIcon: UIImageView?
+    private var gender = UILabel()
+    private var genderIcon: UIImageView?
+    private var height = UILabel()
+    private var heightIcon: UIImageView?
+    private var sexualOrientation = UILabel()
+    private var sexualOrientationIcon: UIImageView?
+    private var alcohol = UILabel()
+    private var alcoholIcon: UIImageView?
+    private var smoking = UILabel()
+    private var smokingIcon: UIImageView?
+    private var userChildren = UILabel()
+    private var userChildrenIcon: UIImageView?
+    private var interests = UILabel()
+    private var interestsIcon: UIImageView?
+    private var tags = UILabel()
+    private var tagsIcon: UIImageView?
     private let aboutlbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "About"
@@ -81,15 +80,23 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         configureNameAndAgeLbl()
         configureTopButtonsStackView()
         configureAboutLable()
+    
+        configureItemPlace(icon: cityIcon!, label: city, last: aboutlbl,
+                           text: "Moscow", imageName: "marker-icon")
+        configureItemPlace(icon: userDescriptionIcon!, label: userDescription,
+                           last: city,
+                           text: "This is my test description. I'm a hockey player!",
+                           imageName: "description-icon")
+        configureItemPlace(icon: jobIcon!, label: job, last: userDescription,
+                           text: "Founder of SeichX LLC", imageName: "job-icon")
+        configureItemPlace(icon: educationIcon!, label: education, last: job,
+                           text: "Bauman Moscow State Technical University (2018-2022)",
+                           imageName: "education-icon")
+//        configureItemPlace(icon: cityIcon, label: city, last: aboutlbl,
+//                           text: "Moscow", imageName: "marker-icon")
+//        configureItemPlace(icon: cityIcon, label: city, last: aboutlbl,
+//                           text: "Moscow", imageName: "marker-icon")
         
-        configureCity()
-        configureJob()
-        configureDescription()
-        configureEducation()
-        configureGender()
-        configureSexualOrientation()
-        configureMaritalStatus()
-        configureDateOfBirth()
         
     }
     
@@ -101,7 +108,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
         scrollView.frame = CGRect(x: 0, y: 0,
                                   width: view.frame.width,
                                   height: view.frame.height)
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 2000)
+        scrollView.contentSize.height = 2500
         view.addSubview(scrollView)
     }
     
@@ -237,267 +244,42 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource,
     }
     
     // MARK: - Configure main information
-    
-    private func configureCity() {
-        scrollView.addSubview(cityIcon)
-        scrollView.addSubview(city)
+    func configureItemPlace(icon: UIImageView, label: UILabel, last: UILabel, text: String, imageName: String) {
+        scrollView.addSubview(icon)
+        scrollView.addSubview(label)
         
-        cityIcon.image = UIImage(named: "marker-icon")
-        cityIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        city.text = "Moscow"
-        city.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        city.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        icon.image = UIImage(named: imageName)
+        icon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
+        label.text = text
+        label.numberOfLines = 0
+        label.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         
-        cityIcon.translatesAutoresizingMaskIntoConstraints = false
-        cityIcon.topAnchor
-            .constraint(equalTo: aboutlbl.bottomAnchor, constant: 15).isActive = true
-        cityIcon.leadingAnchor
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.topAnchor
+            .constraint(equalTo: last.bottomAnchor, constant: 15).isActive = true
+        icon.leadingAnchor
             .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        cityIcon.widthAnchor
+        icon.widthAnchor
             .constraint(equalToConstant: 20).isActive = true
-        cityIcon.heightAnchor
-            .constraint(equalToConstant: city.text == "" ? 0 : 20).isActive = true
+        icon.heightAnchor
+            .constraint(equalToConstant: label.text == "" ? 0 : 20).isActive = true
         
-        city.translatesAutoresizingMaskIntoConstraints = false
-        city.centerYAnchor
-            .constraint(equalTo: cityIcon.centerYAnchor).isActive = true
-        city.leadingAnchor
-            .constraint(equalTo: cityIcon.trailingAnchor, constant: 10).isActive = true
-        city.heightAnchor
-            .constraint(equalToConstant: city.text == "" ? 0 : 20).isActive = true
-    }
-    
-    private func configureJob() {
-        scrollView.addSubview(jobIcon)
-        scrollView.addSubview(job)
-        
-        jobIcon.image = UIImage(named: "job-icon")
-        jobIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        job.text = "Head of the company SeichX LLC"
-        job.numberOfLines = 0
-        job.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        job.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        
-        jobIcon.translatesAutoresizingMaskIntoConstraints = false
-        jobIcon.topAnchor
-            .constraint(equalTo: cityIcon.bottomAnchor, constant: 15).isActive = true
-        jobIcon.leadingAnchor
-            .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        jobIcon.widthAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        jobIcon.heightAnchor
-            .constraint(equalToConstant: job.text == "" ? 0 : 20).isActive = true
-        
-        job.translatesAutoresizingMaskIntoConstraints = false
-        job.topAnchor
-            .constraint(equalTo: jobIcon.topAnchor).isActive = true
-        job.leadingAnchor
-            .constraint(equalTo: jobIcon.trailingAnchor, constant: 10).isActive = true
-        job.widthAnchor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.topAnchor
+            .constraint(equalTo: icon.topAnchor).isActive = true
+        label.leadingAnchor
+            .constraint(equalTo: icon.trailingAnchor, constant: 10).isActive = true
+        label.widthAnchor
             .constraint(equalToConstant: view.frame.width - 60).isActive = true
         
-        if job.text == "" {
-            jobIcon.topAnchor
-                .constraint(equalTo: cityIcon.bottomAnchor, constant: 0).isActive = true
-            jobIcon.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            job.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        if label.text == "" {
+            icon.topAnchor
+                .constraint(equalTo: last.bottomAnchor, constant: 0).isActive = true
+            icon.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            label.heightAnchor.constraint(equalToConstant: 0).isActive = true
         }
     }
-    
-    private func configureDescription() {
-        scrollView.addSubview(userDescriptionIcon)
-        scrollView.addSubview(userDescription)
-        
-        userDescriptionIcon.image = UIImage(named: "description-icon")
-        userDescriptionIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        userDescription.text = "Student of BMSTU. Hockey player. Love drink beer and smoke weed"
-        userDescription.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        userDescription.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        userDescription.numberOfLines = 0
-        
-        userDescriptionIcon.translatesAutoresizingMaskIntoConstraints = false
-        userDescriptionIcon.topAnchor
-            .constraint(equalTo: jobIcon.bottomAnchor, constant: 15).isActive = true
-        userDescriptionIcon.leadingAnchor
-            .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        userDescriptionIcon.widthAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        userDescriptionIcon.heightAnchor
-            .constraint(equalToConstant: userDescription.text == "" ? 0 : 20).isActive = true
-        
-        userDescription.translatesAutoresizingMaskIntoConstraints = false
-        userDescription.topAnchor
-            .constraint(equalTo: userDescriptionIcon.topAnchor).isActive = true
-        userDescription.leadingAnchor
-            .constraint(equalTo: userDescriptionIcon.trailingAnchor, constant: 10).isActive = true
-        userDescription.widthAnchor
-            .constraint(equalToConstant: view.frame.width - 60).isActive = true
-        
-        if userDescription.text == "" {
-            userDescriptionIcon.topAnchor
-                .constraint(equalTo: jobIcon.bottomAnchor, constant: 0).isActive = true
-            userDescriptionIcon.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            userDescription.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        }
-    }
-    
-    private func configureEducation() {
-        scrollView.addSubview(educationIcon)
-        scrollView.addSubview(education)
-        
-        educationIcon.image = UIImage(named: "education-icon")
-        educationIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        education.text = "Bauman Moscow State Technical University (2018 - 2022)"
-        education.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        education.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        education.numberOfLines = 0
-        
-        educationIcon.translatesAutoresizingMaskIntoConstraints = false
-        educationIcon.topAnchor
-            .constraint(equalTo: userDescription.bottomAnchor, constant: 15).isActive = true
-        educationIcon.leadingAnchor
-            .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        educationIcon.widthAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        educationIcon.heightAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        
-        education.translatesAutoresizingMaskIntoConstraints = false
-        education.topAnchor
-            .constraint(equalTo: educationIcon.topAnchor).isActive = true
-        education.leadingAnchor
-            .constraint(equalTo: educationIcon.trailingAnchor, constant: 10).isActive = true
-        education.widthAnchor
-            .constraint(equalToConstant: view.frame.width - 60).isActive = true
-        
-        if education.text == "" {
-            educationIcon.topAnchor
-                .constraint(equalTo: userDescription.bottomAnchor, constant: 0).isActive = true
-            educationIcon.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            education.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        }
-    }
-    
-    private func configureGender() {
-        scrollView.addSubview(genderIcon)
-        scrollView.addSubview(gender)
-        
-        genderIcon.image = UIImage(named: "gender-icon")
-        genderIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        gender.text = "Male"
-        gender.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        gender.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        gender.numberOfLines = 0
-        
-        genderIcon.translatesAutoresizingMaskIntoConstraints = false
-        genderIcon.topAnchor
-            .constraint(equalTo: education.bottomAnchor, constant: 15).isActive = true
-        genderIcon.leadingAnchor
-            .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        genderIcon.widthAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        genderIcon.heightAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        
-        gender.translatesAutoresizingMaskIntoConstraints = false
-        gender.topAnchor
-            .constraint(equalTo: genderIcon.topAnchor).isActive = true
-        gender.leadingAnchor
-            .constraint(equalTo: genderIcon.trailingAnchor, constant: 10).isActive = true
-        gender.widthAnchor
-            .constraint(equalToConstant: scrollView.frame.width - 60).isActive = true
-        
-        if gender.text == "" {
-            genderIcon.topAnchor
-                .constraint(equalTo: education.bottomAnchor, constant: 0).isActive = true
-            genderIcon.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            gender.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        }
-    }
-    
-    private func configureSexualOrientation() {
-        scrollView.addSubview(sexualOrientationIcon)
-        scrollView.addSubview(sexualOrientation)
-        
-        sexualOrientationIcon.image = UIImage(named: "sexual-orientation-icon")
-        sexualOrientationIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        sexualOrientation.text = "Heterosexual"
-        sexualOrientation.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        sexualOrientation.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        sexualOrientation.numberOfLines = 0
-        
-        sexualOrientationIcon.translatesAutoresizingMaskIntoConstraints = false
-        sexualOrientationIcon.topAnchor
-            .constraint(equalTo: gender.bottomAnchor, constant: 15).isActive = true
-        sexualOrientationIcon.leadingAnchor
-            .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        sexualOrientationIcon.widthAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        sexualOrientationIcon.heightAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        
-        sexualOrientation.translatesAutoresizingMaskIntoConstraints = false
-        sexualOrientation.topAnchor
-            .constraint(equalTo: sexualOrientationIcon.topAnchor).isActive = true
-        sexualOrientation.leadingAnchor
-            .constraint(equalTo: sexualOrientationIcon.trailingAnchor, constant: 10).isActive = true
-        sexualOrientation.widthAnchor
-            .constraint(equalToConstant: scrollView.frame.width - 60).isActive = true
-        
-        if sexualOrientation.text == "" {
-            sexualOrientationIcon.topAnchor
-                .constraint(equalTo: gender.bottomAnchor, constant: 0).isActive = true
-            sexualOrientationIcon.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            sexualOrientation.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        }
-    }
-    
-    private func configureMaritalStatus() {
-        scrollView.addSubview(maritalStatusIcon)
-        scrollView.addSubview(maritalStatus)
-        
-        maritalStatusIcon.image = UIImage(named: "marital-icon")
-        maritalStatusIcon.tintColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        maritalStatus.text = "Single"
-        maritalStatus.textColor = UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1)
-        maritalStatus.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        maritalStatus.numberOfLines = 0
-        
-        maritalStatusIcon.translatesAutoresizingMaskIntoConstraints = false
-        maritalStatusIcon.topAnchor
-            .constraint(equalTo: sexualOrientation.bottomAnchor, constant: 15).isActive = true
-        maritalStatusIcon.leadingAnchor
-            .constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-        maritalStatusIcon.widthAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        maritalStatusIcon.heightAnchor
-            .constraint(equalToConstant: 20).isActive = true
-        
-        maritalStatus.translatesAutoresizingMaskIntoConstraints = false
-        maritalStatus.topAnchor
-            .constraint(equalTo: maritalStatusIcon.topAnchor).isActive = true
-        maritalStatus.leadingAnchor
-            .constraint(equalTo: maritalStatusIcon.trailingAnchor, constant: 10).isActive = true
-        maritalStatus.widthAnchor
-            .constraint(equalToConstant: scrollView.frame.width - 60).isActive = true
-        maritalStatus.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -90).isActive = true
-        
-        if maritalStatus.text == "" {
-            maritalStatusIcon.topAnchor
-                .constraint(equalTo: sexualOrientation.bottomAnchor,
-                            constant: 0).isActive = true
-            maritalStatusIcon.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            maritalStatus.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        }
-    }
-    
-    private func configureDateOfBirth() {}
-    private func configureHeight() {}
-    private func configureChildren() {}
-    private func configureSmokeAndAlcohol() {}
-    private func configureInterests() {}
-    private func configureTags() {}
-    private func configureLinks() {}
     
     // MARK: - COllection view configuration
     private func configurePhotoCollectionView() {
